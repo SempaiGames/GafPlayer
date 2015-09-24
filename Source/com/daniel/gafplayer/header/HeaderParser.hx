@@ -9,7 +9,7 @@ import openfl.utils.Endian;
 
 class HeaderParser {
 
-	public static function parse (bytes : ByteArray) {
+	public static function parse (bytes : ByteArray) : { header : Header, body : ByteArray } {
 
 		var header = new Header();
 
@@ -38,7 +38,7 @@ class HeaderParser {
 			throw "Implement";
 		}
 
-		return header;
+		return { header : header, body : headerEnd };
 
 	}
 

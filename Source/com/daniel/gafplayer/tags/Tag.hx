@@ -6,4 +6,8 @@ class Tag {
 
 	}
 
+	public function toString () {
+		return "Unknown";
+	}
+
 }
