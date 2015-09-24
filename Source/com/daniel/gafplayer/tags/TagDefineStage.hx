@@ -4,10 +4,10 @@ import openfl.utils.ByteArray;
 
 class TagDefineStage extends Tag {
 
-	var fps : Int;
-	var color : Int;
-	var width : Int;
-	var height : Int;
+	public var fps : Int;
+	public var color : Int;
+	public var width : Int;
+	public var height : Int;
 
 	public function new(data : ByteArray) {
 		super();

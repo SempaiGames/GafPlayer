@@ -4,9 +4,7 @@ class Header {
 
 	public var majorVersion : Int;
 	public var minorVersion : Int;
-	//public var scaleValuesCount : Int;
 	public var scaleValues : Array<Float>;
-	//public var csfValuesCount : Int;
 	public var csfValues : Array<Float>;
 
 	public function new () {

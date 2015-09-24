@@ -1,9 +1,19 @@
 package com.daniel.gafplayer;
 
+import flash.geom.Rectangle;
 import openfl.geom.Point;
 import openfl.utils.ByteArray;
 
 class Utils {
+
+	public static function readRect(b : ByteArray) {
+		return new Rectangle(
+			b.readFloat(),
+			b.readFloat(),
+			b.readFloat(),
+			b.readFloat()
+		);
+	}
 
 	public static function readPoint (b : ByteArray) {
 		return new Point(b.readFloat(), b.readFloat());

@@ -6,22 +6,22 @@ import openfl.utils.ByteArray;
 
 class TagDefineTimeline extends Tag {
 
-	var frameSize : Point;
-	var pivot : Point;
+	var framesCount : Int;
 
 	public function new(data : ByteArray) {
 		super();
-		data.readUnsignedInt();
-		data.readUnsignedInt();
-		frameSize = Utils.readPoint(data);
-		pivot = Utils.readPoint(data);
-		var hasLinkage = data.readUnsignedByte();
-		if (hasLinkage!=0) {
-			var linkageName = Utils.readString(data);
-		}
-		trace("frameSize: " + frameSize);
-		trace("pivot: " + pivot);
-		trace("hasLinkage: " + hasLinkage);
+		data.readUnsignedByte();
+		//data.readUnsignedByte();
+		//trace("id: " + data.readUnsignedInt());
+		trace("framesCount " + data.readUnsignedInt());
+		trace("bounds: " + Utils.readRect(data));
+		trace("pivot: " + Utils.readPoint(data));
+		trace("has linkage: " + data.readUnsignedByte());
+		var tag : Tag;
+		do {
+			tag = TagParser.readTag(data);
+			trace("asdas: " + tag.toString());
+		} while (tag.toString()!="TagEnd");
 	}
 
 	override public function toString () {

@@ -16,7 +16,9 @@ class TagParser {
 	
 	public static function readTagData (inStream : ByteArray) : TagData {
 		var id : TagId = inStream.readUnsignedShort();
+		trace("id: " + id);
 		var length = inStream.readUnsignedInt();
+		trace("id: " + id + " length: " + length);
 		var data = new ByteArray();
 		if (id!=TagId.TagEnd) {
 			inStream.readBytes(data, 0, length);
