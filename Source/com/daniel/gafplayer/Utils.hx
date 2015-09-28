@@ -1,5 +1,6 @@
 package com.daniel.gafplayer;
 
+import openfl.geom.Matrix;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
@@ -26,6 +27,17 @@ class Utils {
 			ret += String.fromCharCode(b.readUnsignedByte());
 		}
 		return ret;
+	}
+
+	public static function readMatrix (b : ByteArray) {
+		return new Matrix(
+			b.readFloat(),
+			b.readFloat(),
+			b.readFloat(),
+			b.readFloat(),
+			b.readFloat(),
+			b.readFloat()
+		);
 	}
 
 }
