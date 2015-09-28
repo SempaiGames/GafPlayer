@@ -1,6 +1,7 @@
 package com.daniel.gafplayer.tags;
 
 import openfl.utils.ByteArray;
+import openfl.utils.Endian;
 
 class TagDefineStage extends Tag {
 
@@ -11,16 +12,12 @@ class TagDefineStage extends Tag {
 
 	public function new(data : ByteArray) {
 		super();
+		this.id = TagId.TagDefineStage;
+		data.endian = Endian.LITTLE_ENDIAN;
 		fps = data.readUnsignedByte();
 		color = data.readUnsignedInt();	// RGBA
 		width = data.readUnsignedShort();
 		height = data.readUnsignedShort();
-		/*
-		trace("fps: " + fps);
-		trace("color: " + color);
-		trace("width: " + width);
-		trace("height: " + height);
-		*/
 	}
 
 	override public function toString () {
