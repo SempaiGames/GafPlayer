@@ -12,6 +12,7 @@ class TagParser {
 			case TagId.TagDefineTimeline:	new TagDefineTimeline(data.data);
 			case TagId.TagDefineAtlas:		new TagDefineAtlas(data.data);
 			case TagId.TagDefineAnimationObjects:	new TagDefineAnimationObjects(data.data);
+			case TagId.TagDefineAnimationFrames2:	new TagDefineAnimationFrames2(data.data);
 			default:	throw "Unimplemented: " + data.id;
 		}
 	}
