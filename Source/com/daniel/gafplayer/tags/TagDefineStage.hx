@@ -10,7 +10,7 @@ class TagDefineStage extends Tag {
 	public var width : Int;
 	public var height : Int;
 
-	public function new(data : ByteArray) {
+	public function new (data : ByteArray) {
 		super();
 		this.id = TagId.TagDefineStage;
 		data.endian = Endian.LITTLE_ENDIAN;
