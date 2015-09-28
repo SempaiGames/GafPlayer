@@ -1,7 +1,7 @@
 package com.daniel.gafplayer;
 
-import flash.geom.Rectangle;
 import openfl.geom.Point;
+import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
 
 class Utils {
@@ -27,5 +27,5 @@ class Utils {
 		}
 		return ret;
 	}
-	
+
 }

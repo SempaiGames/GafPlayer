@@ -2,8 +2,10 @@ package com.daniel.gafplayer.tags;
 
 class Tag {
 
-	public function new () {
+	public var id(default, null) : Int;
 
+	public function new () {
+		id = -1;
 	}
 
 	public function toString () {

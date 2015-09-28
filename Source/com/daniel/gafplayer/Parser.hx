@@ -17,7 +17,7 @@ class Parser {
 		do {
 			tag = TagParser.readTag(h.body);
 			tagsData.push(tag);
-		} while (tag.toString()!="TagEnd");
+		} while (tag.id != TagId.TagEnd);
 	}
 
 	public static function loadFromFile (path : String) {
