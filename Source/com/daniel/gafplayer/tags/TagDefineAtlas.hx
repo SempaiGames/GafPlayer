@@ -86,4 +86,8 @@ class TagDefineAtlas extends Tag {
 		}
 	}
 
+	override public function toString () {
+		return "TagDefineAtlas";
+	}
+
 }

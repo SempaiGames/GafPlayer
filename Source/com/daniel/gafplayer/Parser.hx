@@ -11,7 +11,6 @@ class Parser {
 	
 	public static function parse (inStream : ByteArray) {
 		var h = HeaderParser.parse(inStream);
-		Sys.println(h.header.toString() + "\n" + h.body.bytesAvailable);
 		var tagsData = [];
 		var tag : Tag;
 		do {

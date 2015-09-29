@@ -34,4 +34,8 @@ class TagDefineAnimationObjects extends Tag {
 		}
 	}
 
+	override public function toString () {
+		return "TagDefineAnimationObjects";
+	}
+
 }
