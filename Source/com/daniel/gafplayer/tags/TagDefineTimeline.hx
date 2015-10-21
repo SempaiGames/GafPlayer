@@ -33,8 +33,12 @@ class TagDefineTimeline extends Tag {
 		} while (tag.id != TagId.TagEnd);
 	}
 
+	override public function getSubTags() : Array<Tag> {
+		return tags.copy();
+	}
+
 	override public function toString () {
-		return "TagDefineTimeline";
+		return "TagDefineTimeline: " + tags;
 	}
 
 }

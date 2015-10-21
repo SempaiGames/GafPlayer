@@ -4,8 +4,11 @@
 	<meta title="Gafplayer" package="com.sample.gafplayer" version="1.0.0" company="Company Name" />
 	<app main="Main" path="Export" file="Gafplayer" />
 
+	<window background="#FF00FF" />
+
 	<source path="Source" />
 
+	<haxelib name="format" />
 	<haxelib name="openfl" />
 
 	<assets path="Assets" rename="assets" include="*" />

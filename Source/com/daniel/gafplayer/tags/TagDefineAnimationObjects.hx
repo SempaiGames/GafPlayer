@@ -15,6 +15,10 @@ class AnimationObject {
 
 class TagDefineAnimationObjects extends Tag {
 
+	public static var TYPE_TEXTURE : String = "texture";
+	public static var TYPE_TEXTFIELD : String = "textField";
+	public static var TYPE_TIMELINE : String = "timeline";
+
 	public var objectsCount : Int;
 	public var objects : Array<AnimationObject>;
 
