@@ -17,6 +17,7 @@ class Main extends Sprite {
 		//addChild(p.getAtlas().getDebugSprite());
 		var sp = new GAFSprite(p);
 		addChild(sp);
+		addChild(new flash.display.FPS());
 	}
 
 

@@ -17,14 +17,14 @@ class GAFSprite extends Sprite {
 	var animationObjects : Map<Int, Sprite>;
 	var frames : Array<Frame>;
 	var fps : Float;
-	var frameId : Int;
-	var lastFrameTime : Int;
+	var currentFrame : Int;
+	var startTime : Int;
 
 	public function new (p : ParserResult) {
 		super();
 		animationObjects = new Map<Int, Sprite>();
-		frameId = 0;
-		lastFrameTime = Lib.getTimer();
+		currentFrame = 0;
+		startTime = Lib.getTimer();
 		var stageData = p.getTagsByType(TagDefineStage)[0];
 		fps = stageData.fps;
 		var tmp = p.getTagsByType(TagDefineAtlas)[0];
@@ -46,30 +46,31 @@ class GAFSprite extends Sprite {
 	}
 
 	function advanceFrame () {
-		if (frameId==0) {
+		if (currentFrame==0) {
 			for (o in animationObjects) {
 				o.alpha = 0;
 			}
 		}
-		trace(frameId+1);
-		var frame = frames[frameId];
+		var frame = frames[currentFrame];
 		for (c in frame.changes) {
 			var spr = animationObjects[c.objectIdRef];
 			spr.alpha = c.alpha;
 			spr.transform.matrix = c.matrix;
 			spr.parent.setChildIndex(spr, c.depth);
 		}
-		frameId++;
-		if (frameId==frames.length) {
-			frameId = 0;
+		currentFrame++;
+		if (currentFrame==frames.length) {
+			currentFrame = 0;
 		}
 	}
 
 	function onEnterFrame (e : Event) {
 		var now = Lib.getTimer();
-		if (now-lastFrameTime/*+Lib.current.stage.frameRate/2*/>1000/fps) {
+		var totalAnimationTime = (1000/fps)*frames.length;		
+		var currentAnimationTime = (now-startTime)%totalAnimationTime;
+		var targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*frames.length);
+		while (targetFrame!=currentFrame) {
 			advanceFrame();
-			lastFrameTime = now;
 		}
 	}
 
