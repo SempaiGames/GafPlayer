@@ -2,10 +2,6 @@ package com.daniel.gafplayer;
 
 import com.daniel.gafplayer.header.Header;
 import com.daniel.gafplayer.tags.Tag;
-import com.daniel.gafplayer.tags.TagDefineAnimationFrames2;
-import com.daniel.gafplayer.tags.TagDefineAnimationObjects;
-import com.daniel.gafplayer.tags.TagDefineAtlas;
-import com.daniel.gafplayer.tags.TagDefineStage;
 
 class ParserResult {
 
@@ -28,40 +24,14 @@ class ParserResult {
 		return ret;
 	}
 
-	public function getAtlas () : com.daniel.gafplayer.Atlas {
+	public function getTagsByType<T> (type : Class<T>) : Array<T> {
+		var ret = [];
 		for (t in tagsList()) {
-			if (Std.is(t, TagDefineAtlas)) {
-				return new com.daniel.gafplayer.Atlas(cast(t, TagDefineAtlas));
+			if (Std.is(t, type)) {
+				ret.push(cast(t));
 			}
 		}
-		return null;
-	}
-
-	public function getAnimationFrames () : TagDefineAnimationFrames2 {
-		for (t in tagsList()) {
-			if (Std.is(t, TagDefineAnimationFrames2)) {
-				return cast(t, TagDefineAnimationFrames2);
-			}
-		}
-		return null;
-	}
-
-	public function getAnimationObjects () : TagDefineAnimationObjects {
-		for (t in tagsList()) {
-			if (Std.is(t, TagDefineAnimationObjects)) {
-				return cast(t, TagDefineAnimationObjects);
-			}
-		}
-		return null;
-	}
-
-	public function getStageData () : TagDefineStage {
-		for (t in tagsList()) {
-			if (Std.is(t, TagDefineStage)) {
-				return cast(t, TagDefineStage);
-			}
-		}
-		return null;
+		return ret;
 	}
 
 }

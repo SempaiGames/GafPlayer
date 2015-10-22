@@ -2,6 +2,9 @@ package com.daniel.gafplayer;
 
 import com.daniel.gafplayer.tags.TagDefineAnimationFrames2;
 import com.daniel.gafplayer.tags.TagDefineAnimationFrames2.Frame;
+import com.daniel.gafplayer.tags.TagDefineAnimationObjects;
+import com.daniel.gafplayer.tags.TagDefineAtlas;
+import com.daniel.gafplayer.tags.TagDefineStage;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
@@ -22,11 +25,11 @@ class GAFSprite extends Sprite {
 		animationObjects = new Map<Int, Sprite>();
 		frameId = 0;
 		lastFrameTime = Lib.getTimer();
-		var stageData = p.getStageData();
+		var stageData = p.getTagsByType(TagDefineStage)[0];
 		fps = stageData.fps;
-		var atlas = p.getAtlas();
-		var pAnimationObjects = p.getAnimationObjects();
-		trace("len: " + pAnimationObjects.objects.length);
+		var tmp = p.getTagsByType(TagDefineAtlas)[0];
+		var atlas = new Atlas(tmp);
+		var pAnimationObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
 		for (obj in pAnimationObjects.objects) {
 			var spr = new Sprite();
 			var bmp = new Bitmap(atlas.elements[obj.atlasIdRef], true);
@@ -37,7 +40,7 @@ class GAFSprite extends Sprite {
 			bmp.y = Std.int(-tmp.pivot.y);
 			this.addChild(spr);
 		}
-		frames = p.getAnimationFrames().frames;
+		frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		Lib.current.stage.addEventListener(MouseEvent.CLICK, function(_) advanceFrame());
 	}

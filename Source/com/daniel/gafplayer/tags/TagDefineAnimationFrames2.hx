@@ -64,7 +64,6 @@ class TagDefineAnimationFrames2 extends Tag {
 					change.alpha = data.readFloat();
 					change.matrix = Utils.readMatrix(data);
 					if (change.hasColorTransform) {
-						trace("CT!!");
 						var alphaOffset = data.readFloat();
 						var redMultiplier = data.readFloat();
 						var redOffset = data.readFloat();
@@ -84,7 +83,6 @@ class TagDefineAnimationFrames2 extends Tag {
 						);
 					}
 					if (change.hasEffect) {
-						trace("EFFECT!!");
 						var effectCount = data.readUnsignedByte();
 						for (k in 0...effectCount) {
 							change.effects.push(Effect.parse(data));

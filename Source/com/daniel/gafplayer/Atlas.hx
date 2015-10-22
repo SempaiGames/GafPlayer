@@ -14,7 +14,7 @@ class Atlas {
 	public var elements : Map<Int, BitmapData>;
 	public var elementsData : Map<Int, Element>;
 
-	public function new (from : com.daniel.gafplayer.tags.TagDefineAtlas) {
+	public function new (from : TagDefineAtlas) {
 		elements = new Map<Int, BitmapData>();
 		elementsData = new Map<Int, Element>();
 		var sources = new Map<Int, BitmapData>();
@@ -27,7 +27,6 @@ class Atlas {
 		for (element in from.elements) {
 			var originBmp = sources[element.atlasIndex];
 			var e = new BitmapData(Std.int(element.width), Std.int(element.height)/*, false*/);
-			trace('${element.elemenetAtlasIndex} ${element.width} ${element.height}');
 			e.copyPixels(
 				originBmp,
 				new Rectangle(element.origin.x, element.origin.y, element.width, element.height),
@@ -38,7 +37,7 @@ class Atlas {
 		}
 	}
 
-	public function getDebugSprite() : Sprite {
+	public function getDebugSprite () : Sprite {
 		var spr = new Sprite();
 		var xBase = 0;
 		var yBase = 0;

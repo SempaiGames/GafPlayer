@@ -6,7 +6,7 @@ import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
 import openfl.utils.Endian;
 
-class AtlasSource {
+private class AtlasSource {
 
 	public var fileName : String;
 	public var csf : Float;
@@ -15,7 +15,7 @@ class AtlasSource {
 
 }
 
-class Atlas {
+private class Atlas {
 
 	public var id : Int;
 	public var sources : Array<AtlasSource>;
