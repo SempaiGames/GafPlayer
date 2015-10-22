@@ -45,7 +45,6 @@ class GAFSprite extends Sprite {
 		this.addChild(containerSpr);
 		frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
 		var pivot = p.getTagsByType(TagDefineTimeline)[0].pivot;
-		trace("pivot: " + pivot);
 		containerSpr.x = pivot.x;
 		containerSpr.y = pivot.y;
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
