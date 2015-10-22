@@ -1,10 +1,11 @@
 package com.daniel.gafplayer;
 
-import com.daniel.gafplayer.tags.TagDefineAnimationFrames2;
 import com.daniel.gafplayer.tags.TagDefineAnimationFrames2.Frame;
+import com.daniel.gafplayer.tags.TagDefineAnimationFrames2;
 import com.daniel.gafplayer.tags.TagDefineAnimationObjects;
 import com.daniel.gafplayer.tags.TagDefineAtlas;
 import com.daniel.gafplayer.tags.TagDefineStage;
+import com.daniel.gafplayer.tags.TagDefineTimeline;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
@@ -30,6 +31,7 @@ class GAFSprite extends Sprite {
 		var tmp = p.getTagsByType(TagDefineAtlas)[0];
 		var atlas = new Atlas(tmp);
 		var pAnimationObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
+		var containerSpr = new Sprite();
 		for (obj in pAnimationObjects.objects) {
 			var spr = new Sprite();
 			var bmp = new Bitmap(atlas.elements[obj.atlasIdRef], true);
@@ -38,14 +40,20 @@ class GAFSprite extends Sprite {
 			var tmp = atlas.elementsData[obj.atlasIdRef];
 			bmp.x = Std.int(-tmp.pivot.x);
 			bmp.y = Std.int(-tmp.pivot.y);
-			this.addChild(spr);
+			containerSpr.addChild(spr);
 		}
+		this.addChild(containerSpr);
 		frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
+		var pivot = p.getTagsByType(TagDefineTimeline)[0].pivot;
+		trace("pivot: " + pivot);
+		containerSpr.x = pivot.x;
+		containerSpr.y = pivot.y;
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		Lib.current.stage.addEventListener(MouseEvent.CLICK, function(_) advanceFrame());
 	}
 
 	function advanceFrame () {
+		currentFrame = (currentFrame+1)%frames.length;
 		if (currentFrame==0) {
 			for (o in animationObjects) {
 				o.alpha = 0;
@@ -57,10 +65,6 @@ class GAFSprite extends Sprite {
 			spr.alpha = c.alpha;
 			spr.transform.matrix = c.matrix;
 			spr.parent.setChildIndex(spr, c.depth);
-		}
-		currentFrame++;
-		if (currentFrame==frames.length) {
-			currentFrame = 0;
 		}
 	}
 
