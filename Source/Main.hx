@@ -2,6 +2,7 @@ package;
 
 
 import com.daniel.gafplayer.GAFSprite;
+import com.daniel.gafplayer.GAFSpriteTilesheet;
 import com.daniel.gafplayer.Parser;
 import flash.events.Event;
 import flash.Lib;
@@ -17,9 +18,8 @@ class Main extends Sprite {
 		anims = [];
 		var p = Parser.loadFromFile("assets/vamp-as3.gaf");
 		trace(p);
-		//addChild(p.getAtlas().getDebugSprite());
-		for (i in 0...10) {
-			var sp = new GAFSprite(p);
+		for (i in 0...50) {
+			var sp = new GAFSpriteTilesheet(p);
 			sp.scaleX = sp.scaleY = 0.5;
 			anims.push({
 				spr : sp,
@@ -34,7 +34,7 @@ class Main extends Sprite {
 
 	}
 
-	function onEnterFrame(_) {
+	function onEnterFrame (_) {
 		var stageW = Lib.current.stage.stageWidth;
 		var stageH = Lib.current.stage.stageHeight;
 		for (a in anims) {

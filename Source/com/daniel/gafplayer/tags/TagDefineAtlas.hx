@@ -32,7 +32,7 @@ class Element {
 	public var width : Float;
 	public var height : Float;
 	public var atlasIndex : Int;
-	public var elemenetAtlasIndex : Int;
+	public var elementAtlasIndex : Int;
 	public var hasScale9Grid : Bool;
 	public var scale9Grid : Rectangle;
 
@@ -76,7 +76,7 @@ class TagDefineAtlas extends Tag {
 			element.width = data.readFloat();
 			element.height = data.readFloat();
 			element.atlasIndex = data.readUnsignedInt();
-			element.elemenetAtlasIndex = data.readUnsignedInt();
+			element.elementAtlasIndex = data.readUnsignedInt();
 			// TODO: if version>=4
 			element.hasScale9Grid = data.readUnsignedByte()!=0;
 			if (element.hasScale9Grid) {
