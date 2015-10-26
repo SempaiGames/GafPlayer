@@ -3,9 +3,10 @@ package com.daniel.gafplayer;
 import com.daniel.gafplayer.header.Header;
 import com.daniel.gafplayer.tags.Tag;
 import com.daniel.gafplayer.tags.TagDefineAtlas;
+import flash.geom.Point;
 import flash.geom.Rectangle;
-import openfl.Assets;
-import openfl.display.Tilesheet;
+import flash.Assets;
+import flash.display.Tilesheet;
 
 class ParserResult {
 
@@ -29,8 +30,8 @@ class ParserResult {
 		for (element in tagDefineAtlas.elements) {
 			trace(element.elementAtlasIndex);
 			tilesheets[element.atlasIndex-1].addTileRect(
-				new Rectangle(element.origin.x,	element.origin.y, element.width, element.height)/*,
-				new Point(-element.pivot.x, -element.piv*/
+				new Rectangle(element.origin.x, element.origin.y, element.width, element.height),
+				new Point(element.pivot.x, element.pivot.y)
 			);
 		}
 

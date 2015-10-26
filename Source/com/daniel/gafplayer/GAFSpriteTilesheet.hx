@@ -4,6 +4,7 @@ import com.daniel.gafplayer.tags.TagDefineAnimationFrames2;
 import com.daniel.gafplayer.tags.TagDefineAnimationObjects;
 import com.daniel.gafplayer.tags.TagDefineAtlas;
 import com.daniel.gafplayer.tags.TagDefineStage;
+import com.daniel.gafplayer.tags.TagDefineTimeline;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
@@ -26,12 +27,16 @@ class GAFSpriteTilesheet extends Sprite {
 		var frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
 		var animObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
 		var stageData = p.getTagsByType(TagDefineStage)[0];
+		var timeLine = p.getTagsByType(TagDefineTimeline)[0];
 		fps = stageData.fps;
 		frameCount = frames.length;
 		startTime = Lib.getTimer();
 		currentFrame = 0;
 		for (frame in frames) {
 			var arr = [];
+			frame.changes.sort(function(x, y) {
+				return x.depth>y.depth ? 1 : -1;
+			});
 			for (change in frame.changes) {
 				var id = 0;
 				for (o in animObjects.objects) {
@@ -41,8 +46,8 @@ class GAFSpriteTilesheet extends Sprite {
 					id++;
 				}
 				var matrix = change.matrix;
-				arr.push(matrix.tx-atlas.elements[id].pivot.x);
-				arr.push(matrix.ty-atlas.elements[id].pivot.y);
+				arr.push(matrix.tx+timeLine.pivot.x);
+				arr.push(matrix.ty+timeLine.pivot.y);
 				arr.push(id);
 				arr.push(matrix.a);
 				arr.push(matrix.b);
@@ -65,8 +70,11 @@ class GAFSpriteTilesheet extends Sprite {
 		var now = Lib.getTimer();
 		var totalAnimationTime = (1000/fps)*frameCount;		
 		var currentAnimationTime = (now-startTime)%totalAnimationTime;
-		currentFrame = Std.int((currentAnimationTime/totalAnimationTime)*frameCount);
-		renderFrame(currentFrame);
+		var targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*frameCount);
+		if (targetFrame!=currentFrame) {
+			currentFrame = targetFrame;
+			renderFrame(currentFrame);
+		}
 	}
 
 }
