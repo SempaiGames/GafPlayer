@@ -1,6 +1,8 @@
 package;
 
 
+import com.daniel.gafplayer.GafLayer;
+import com.daniel.gafplayer.GafLayerElement;
 import com.daniel.gafplayer.GAFSprite;
 import com.daniel.gafplayer.GAFSpriteTilesheet;
 import com.daniel.gafplayer.Parser;
@@ -8,27 +10,26 @@ import flash.events.Event;
 import flash.Lib;
 import openfl.display.Sprite;
 
-
 class Main extends Sprite {
 
-	var anims : Array<{spr : Sprite, xSpeed : Float, ySpeed : Float}>;
+	var anims : Array<{spr : GafLayerElement, xSpeed : Float, ySpeed : Float}>;
 
 	public function new () {
 		super ();
 		anims = [];
 		var p = Parser.loadFromFile("assets/vamp-as3.gaf");
-		trace(p);
-		for (i in 0...50) {
-			var sp = new GAFSpriteTilesheet(p);
-			sp.scaleX = sp.scaleY = 0.5;
+		var gafLayer = new GafLayer(p);
+		for (i in 0...30) {
+			var sp = gafLayer.createElement();
+			//sp.scaleX = sp.scaleY = 0.5;
 			anims.push({
 				spr : sp,
 				xSpeed : (Math.random()-0.5)*10,
 				ySpeed : (Math.random()-0.5)*10,
 			});
-			addChild(sp);
+			gafLayer.addElement(sp);
 		}
-
+		addChild(gafLayer);
 		addChild(new flash.display.FPS());
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 

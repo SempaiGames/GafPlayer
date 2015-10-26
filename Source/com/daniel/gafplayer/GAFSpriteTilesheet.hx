@@ -23,7 +23,6 @@ class GAFSpriteTilesheet extends Sprite {
 		super();
 		drawArrays = new Map<Int, Array<Float>>();
 		tilesheet = p.tilesheets[0];
-		var atlas = p.getTagsByType(TagDefineAtlas)[0];
 		var frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
 		var animObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
 		var stageData = p.getTagsByType(TagDefineStage)[0];
@@ -68,7 +67,7 @@ class GAFSpriteTilesheet extends Sprite {
 
 	function onEnterFrame (e : Event) {
 		var now = Lib.getTimer();
-		var totalAnimationTime = (1000/fps)*frameCount;		
+		var totalAnimationTime = (1000/fps)*frameCount;
 		var currentAnimationTime = (now-startTime)%totalAnimationTime;
 		var targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*frameCount);
 		if (targetFrame!=currentFrame) {
