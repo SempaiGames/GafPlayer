@@ -21,6 +21,7 @@ class GafLayer extends Sprite {
 		this.parserResults = p;
 		this.dirty = false;
 		this.tilesheet = p.tilesheets[0];
+		this.drawArray = [];
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 	}
 
@@ -29,13 +30,19 @@ class GafLayer extends Sprite {
 	}
 
 	public function addElement (e : GafLayerElement) : Void {
-		dirty = true;
 		elements.push(e);
+		for (i in 0...7*e.maxSubElements) {
+			drawArray.push(0);
+		}
+		dirty = true;
 	}
 
 	public function removeElement (e : GafLayerElement) : Void {
-		dirty = true;
 		elements.remove(e);
+		for (i in 0...7*e.maxSubElements) {
+			drawArray.pop();
+		}
+		dirty = true;
 	}
 
 	function onEnterFrame (e : Event) {
@@ -45,19 +52,21 @@ class GafLayer extends Sprite {
 				dirty = true;
 			}
 		}
-		if (dirty) {
-			trace(1);
+		if (dirty) {			
 			var gfx = this.graphics;
-			drawArray = [];
 			gfx.clear();
+			var j = 0;
 			for (e in elements) {
-				for (i in e.drawArray()) {
-					drawArray.push(i);
+				for (val in e.drawArray()) {
+					drawArray[j] = val;
+					j++;
 				}
 			}
+			while (j<drawArray.length) {
+				drawArray[j] = -1;
+				j++;
+			}
 			tilesheet.drawTiles(gfx, drawArray, true, Tilesheet.TILE_TRANS_2x2);
-		} else {
-			trace(2);
 		}
 		dirty = false;
 	}

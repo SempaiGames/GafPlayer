@@ -23,6 +23,7 @@ class GafLayerElement {
 	public var y(default, set) : Float;
 	public var width(default, null) : Float;
 	public var height(default, null) : Float;
+	public var maxSubElements(default, null) : Int;
 
 	private function new (p : ParserResult) {
 		var animObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
@@ -41,6 +42,7 @@ class GafLayerElement {
 
 		this.drawArrays = new Map<Int, Array<Float>>();
 		this.drawArraysOriginal = new Map<Int, Array<Float>>();
+		this.maxSubElements = 0;
 
 		for (frame in frames) {
 			var arr = [];
@@ -63,6 +65,9 @@ class GafLayerElement {
 				arr.push(matrix.b);
 				arr.push(matrix.c);
 				arr.push(matrix.d);
+			}
+			if (maxSubElements<frame.changes.length) {
+				maxSubElements = frame.changes.length;
 			}
 			drawArrays[frame.frameId] = arr;
 			drawArraysOriginal[frame.frameId] = arr.copy();
