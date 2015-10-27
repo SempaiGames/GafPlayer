@@ -13,7 +13,6 @@ class GafLayerElement {
 	var currentArray : Array<Float>;
 	var currentFrame : Int;
 	var drawArrays : Map<Int, Array<Float>>;
-	var drawArraysOriginal : Map<Int, Array<Float>>;
 	var fps : Int;
 	var frameCount : Int;
 	var startTime : Int;
@@ -21,8 +20,9 @@ class GafLayerElement {
 
 	public var x(default, set) : Float;
 	public var y(default, set) : Float;
-	public var width(default, null) : Float;
-	public var height(default, null) : Float;
+	public var width(get, null) : Float;
+	public var height(get, null) : Float;
+	public var scale(default, set) : Float;
 	public var maxSubElements(default, null) : Int;
 
 	private function new (p : ParserResult) {
@@ -37,11 +37,11 @@ class GafLayerElement {
 		this.startTime = Lib.getTimer();
 		this.x = 0;
 		this.y = 0;
-		this.width = timeLine.frameSize.width - timeLine.frameSize.x;
-		this.height = timeLine.frameSize.height - timeLine.frameSize.y;
+		this.width = timeLine.frameSize.width/* - timeLine.frameSize.x*/;
+		this.height = timeLine.frameSize.height/* - timeLine.frameSize.y*/;
+		this.scale = 1.0;
 
 		this.drawArrays = new Map<Int, Array<Float>>();
-		this.drawArraysOriginal = new Map<Int, Array<Float>>();
 		this.maxSubElements = 0;
 
 		for (frame in frames) {
@@ -70,10 +70,7 @@ class GafLayerElement {
 				maxSubElements = frame.changes.length;
 			}
 			drawArrays[frame.frameId] = arr;
-			drawArraysOriginal[frame.frameId] = arr.copy();
 		}
-
-		updateCurrentArray();
 
 	}
 
@@ -89,16 +86,33 @@ class GafLayerElement {
 		return y;
 	}
 
-	function updateCurrentArray() {
-		currentArray = drawArrays[currentFrame+1];
-		var original = drawArraysOriginal[currentFrame+1];
+	function set_scale (scale : Float) : Float {
+		this.scale = scale;
+		dirty = true;
+		return scale;
+	}
+
+	function get_width () : Float {
+		return this.width * this.scale;
+	}
+
+	function get_height () : Float {
+		return this.height * this.scale;
+	}
+
+	public function addToArray(arr : Array<Float>, arrIndex : Int) : Int {
+		var currentArray = drawArrays[currentFrame+1];
 		var i = 0;
-		while (i+1<currentArray.length) {
-			currentArray[i] = original[i] + x;
-			++i;
-			currentArray[i] = original[i] + y;
-			i+=6;
+		while (i<currentArray.length) {
+			arr[arrIndex++] = currentArray[i++] * scale+ x;
+			arr[arrIndex++] = currentArray[i++] * scale+ y;
+			arr[arrIndex++] = currentArray[i++];
+			arr[arrIndex++] = currentArray[i++] * scale;
+			arr[arrIndex++] = currentArray[i++] * scale;
+			arr[arrIndex++] = currentArray[i++] * scale;
+			arr[arrIndex++] = currentArray[i++] * scale;
 		}
+		return arrIndex;
 	}
 
 	public function update (now : Int) : Bool {
@@ -107,16 +121,11 @@ class GafLayerElement {
 		var targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*frameCount);
 		if (dirty || targetFrame != currentFrame) {
 			currentFrame = targetFrame;
-			updateCurrentArray();
 			dirty = false;
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-	public function drawArray() : Array<Float> {
-		return currentArray;
 	}
 
 }

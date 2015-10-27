@@ -52,19 +52,15 @@ class GafLayer extends Sprite {
 				dirty = true;
 			}
 		}
-		if (dirty) {			
+		if (dirty) {
+			var i = 0;
 			var gfx = this.graphics;
 			gfx.clear();
-			var j = 0;
 			for (e in elements) {
-				for (val in e.drawArray()) {
-					drawArray[j] = val;
-					j++;
-				}
+				i = e.addToArray(drawArray, i);
 			}
-			while (j<drawArray.length) {
-				drawArray[j] = -1;
-				j++;
+			while (i<drawArray.length) {
+				drawArray[i++] = -1;
 			}
 			tilesheet.drawTiles(gfx, drawArray, true, Tilesheet.TILE_TRANS_2x2);
 		}

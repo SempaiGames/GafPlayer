@@ -19,9 +19,9 @@ class Main extends Sprite {
 		anims = [];
 		var p = Parser.loadFromFile("assets/vamp-as3.gaf");
 		var gafLayer = new GafLayer(p);
-		for (i in 0...30) {
+		for (i in 0...20) {
 			var sp = gafLayer.createElement();
-			//sp.scaleX = sp.scaleY = 0.5;
+			sp.scale = 0.5;
 			anims.push({
 				spr : sp,
 				xSpeed : (Math.random()-0.5)*10,
