@@ -1,7 +1,7 @@
-package com.daniel.gafplayer;
+package com.sempaigames.gafplayer;
 
-import com.daniel.gafplayer.tags.TagDefineAtlas;
-import com.daniel.gafplayer.tags.TagDefineAtlas.Element;
+import com.sempaigames.gafplayer.tags.TagDefineAtlas;
+import com.sempaigames.gafplayer.tags.TagDefineAtlas.Element;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;

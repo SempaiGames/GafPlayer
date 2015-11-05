@@ -1,4 +1,4 @@
-package com.daniel.gafplayer;
+package com.sempaigames.gafplayer;
 
 import openfl.geom.Matrix;
 import openfl.geom.Point;

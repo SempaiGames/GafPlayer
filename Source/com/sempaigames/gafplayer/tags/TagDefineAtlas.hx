@@ -1,6 +1,6 @@
-package com.daniel.gafplayer.tags;
+package com.sempaigames.gafplayer.tags;
 
-import com.daniel.gafplayer.Utils;
+import com.sempaigames.gafplayer.Utils;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;

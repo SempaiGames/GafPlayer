@@ -1,4 +1,4 @@
-package com.daniel.gafplayer.tags;
+package com.sempaigames.gafplayer.tags;
 
 class Tag {
 

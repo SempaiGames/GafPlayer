@@ -1,4 +1,4 @@
-package com.daniel.gafplayer.header;
+package com.sempaigames.gafplayer.header;
 
 import haxe.io.Bytes;
 import haxe.io.BytesInput;

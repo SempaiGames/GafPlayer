@@ -1,6 +1,6 @@
-package com.daniel.gafplayer.tags;
+package com.sempaigames.gafplayer.tags;
 
-import com.daniel.gafplayer.tags.effects.Effect;
+import com.sempaigames.gafplayer.tags.effects.Effect;
 import openfl.geom.ColorTransform;
 import openfl.geom.Matrix;
 import openfl.utils.ByteArray;

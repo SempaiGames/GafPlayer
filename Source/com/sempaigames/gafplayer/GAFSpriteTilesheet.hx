@@ -1,10 +1,10 @@
-package com.daniel.gafplayer;
+package com.sempaigames.gafplayer;
 
-import com.daniel.gafplayer.tags.TagDefineAnimationFrames2;
-import com.daniel.gafplayer.tags.TagDefineAnimationObjects;
-import com.daniel.gafplayer.tags.TagDefineAtlas;
-import com.daniel.gafplayer.tags.TagDefineStage;
-import com.daniel.gafplayer.tags.TagDefineTimeline;
+import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2;
+import com.sempaigames.gafplayer.tags.TagDefineAnimationObjects;
+import com.sempaigames.gafplayer.tags.TagDefineAtlas;
+import com.sempaigames.gafplayer.tags.TagDefineStage;
+import com.sempaigames.gafplayer.tags.TagDefineTimeline;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;

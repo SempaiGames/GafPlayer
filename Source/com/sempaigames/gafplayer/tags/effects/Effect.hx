@@ -1,4 +1,4 @@
-package com.daniel.gafplayer.tags.effects;
+package com.sempaigames.gafplayer.tags.effects;
 
 import openfl.utils.ByteArray;
 import openfl.utils.Endian;

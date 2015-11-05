@@ -1,6 +1,6 @@
-package com.daniel.gafplayer.tags.effects;
+package com.sempaigames.gafplayer.tags.effects;
 
-import com.daniel.gafplayer.tags.effects.Effect;
+import com.sempaigames.gafplayer.tags.effects.Effect;
 import openfl.utils.ByteArray;
 
 class EffectGlow extends Effect {

@@ -1,12 +1,12 @@
-package com.daniel.gafplayer;
+package com.sempaigames.gafplayer;
 
-import com.daniel.gafplayer.ParserResult;
+import com.sempaigames.gafplayer.ParserResult;
 import flash.events.Event;
 import flash.display.Sprite;
 import flash.display.Tilesheet;
 import flash.Lib;
 
-@:access(com.daniel.gafplayer.GafLayerElement)
+@:access(com.sempaigames.gafplayer.GafLayerElement)
 class GafLayer extends Sprite {
 
 	var tilesheet : Tilesheet;

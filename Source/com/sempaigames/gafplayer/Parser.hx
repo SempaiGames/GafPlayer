@@ -1,9 +1,9 @@
-package com.daniel.gafplayer;
+package com.sempaigames.gafplayer;
 
-import com.daniel.gafplayer.header.HeaderParser;
-import com.daniel.gafplayer.tags.Tag;
-import com.daniel.gafplayer.tags.TagId;
-import com.daniel.gafplayer.tags.TagParser;
+import com.sempaigames.gafplayer.header.HeaderParser;
+import com.sempaigames.gafplayer.tags.Tag;
+import com.sempaigames.gafplayer.tags.TagId;
+import com.sempaigames.gafplayer.tags.TagParser;
 import openfl.Assets;
 import openfl.utils.ByteArray;
 

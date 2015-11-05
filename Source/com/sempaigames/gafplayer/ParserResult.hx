@@ -1,8 +1,8 @@
-package com.daniel.gafplayer;
+package com.sempaigames.gafplayer;
 
-import com.daniel.gafplayer.header.Header;
-import com.daniel.gafplayer.tags.Tag;
-import com.daniel.gafplayer.tags.TagDefineAtlas;
+import com.sempaigames.gafplayer.header.Header;
+import com.sempaigames.gafplayer.tags.Tag;
+import com.sempaigames.gafplayer.tags.TagDefineAtlas;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.Assets;
