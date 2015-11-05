@@ -1,0 +1,12 @@
+{
+  "name": "gafplayer",
+  "url" : "https://github.com/SempaiGames/GafPlayer",
+  "license": "MIT",
+  "tags": ["gaf", "openfl"],
+  "description": "GAF format plugin for OpenFL.",
+  "version": "1.0.0",
+  "contributors": ["fbricker"],
+  "dependencies": {
+    "openfl": ""
+  }
+}
