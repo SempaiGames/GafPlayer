@@ -48,7 +48,9 @@ class GAFSprite extends Sprite {
 		containerSpr.x = pivot.x;
 		containerSpr.y = pivot.y;
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
-		Lib.current.stage.addEventListener(MouseEvent.CLICK, function(_) advanceFrame());
+		do {
+			advanceFrame();
+		} while (currentFrame!=0);
 	}
 
 	function advanceFrame () {

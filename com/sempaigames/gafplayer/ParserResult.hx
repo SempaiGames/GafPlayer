@@ -28,7 +28,6 @@ class ParserResult {
 		}
 
 		for (element in tagDefineAtlas.elements) {
-			trace(element.elementAtlasIndex);
 			tilesheets[element.atlasIndex-1].addTileRect(
 				new Rectangle(element.origin.x, element.origin.y, element.width, element.height),
 				new Point(element.pivot.x, element.pivot.y)

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="Gafplayer" package="com.sample.gafplayer" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="Gafplayer" />
+
+	<window background="#FF00FF" fps="60" />
+
+	<source path="Source" />
+
+	<haxelib name="openfl" />
+	<haxelib name="gafplayer" />
+
+	<assets path="Assets" rename="assets" include="*" />
+
+</project>
