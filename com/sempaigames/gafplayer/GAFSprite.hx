@@ -95,12 +95,12 @@ class GAFSprite extends Sprite {
 			targetFrame = startFrame;
 		} else {
 			var now = Lib.getTimer();
-			var totalAnimationTime = Std.int((1000/fps)*(endFrame-startFrame+1));
+			var totalAnimationTime = Std.int((1000/fps)*(endFrame-startFrame));
 			var currentAnimationTime = (now-startTime)%totalAnimationTime;
 			if (!loop && now>startTime+totalAnimationTime) {
 				targetFrame = endFrame - 2;
 			} else {
-				targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*(endFrame-startFrame+1)) + startFrame - 2;
+				targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*(endFrame-startFrame)) + startFrame - 1;
 			}
 		}
 		while (targetFrame!=currentFrame) {
