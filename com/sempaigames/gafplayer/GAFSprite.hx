@@ -53,24 +53,42 @@ class GAFSprite extends Sprite {
 		var pivot = p.getTagsByType(TagDefineTimeline)[0].pivot;
 		containerSpr.x = pivot.x;
 		containerSpr.y = pivot.y;
+		#if !gafplayer_manual_update
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		#end
 		do {
 			advanceFrame();
 		} while (currentFrame!=0);
 	}
 
-	public function play (startFrame : Int, endFrame : Int) {
+	public function play (startFrame : Int, endFrame : Int
+	#if gafplayer_manual_update
+	, startTime : Int
+	#end
+	) {
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
 		this.loop = false;
+		#if gafplayer_manual_update
+		this.startTime = startTime;
+		#else
 		this.startTime = Lib.getTimer();
+		#end
 	}
 
-	public function playLoop (startFrame : Int, endFrame : Int) {
+	public function playLoop (startFrame : Int, endFrame : Int
+	#if gafplayer_manual_update
+	, startTime : Int
+	#end
+	) {
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
 		this.loop = true;
+		#if gafplayer_manual_update
+		this.startTime = startTime;
+		#else
 		this.startTime = Lib.getTimer();
+		#end
 	}
 
 	function advanceFrame () {
@@ -89,12 +107,11 @@ class GAFSprite extends Sprite {
 		}
 	}
 
-	function onEnterFrame (e : Event) {
+	public function update (now : Int) : Void {
 		var targetFrame : Int;
 		if (endFrame==startFrame) {
 			targetFrame = startFrame;
 		} else {
-			var now = Lib.getTimer();
 			var totalAnimationTime = Std.int((1000/fps)*(endFrame-startFrame));
 			var currentAnimationTime = (now-startTime)%totalAnimationTime;
 			if (!loop && now>startTime+totalAnimationTime) {
@@ -106,6 +123,10 @@ class GAFSprite extends Sprite {
 		while (targetFrame!=currentFrame) {
 			advanceFrame();
 		}
+	}
+
+	function onEnterFrame (e : Event) {
+		update(Lib.getTimer());
 	}
 
 }
