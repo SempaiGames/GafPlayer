@@ -8,5 +8,6 @@
   "contributors": ["fbricker"],
   "dependencies": {
     "openfl": ""
-  }
+  },
+  "releasenote": "First release... working!"
 }
