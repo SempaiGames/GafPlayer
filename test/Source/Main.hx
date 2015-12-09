@@ -8,11 +8,12 @@ import flash.Lib;
 
 class Main {
 
-	static var spr : Sprite;
+	static var spr : GAFSprite;
 
 	public static function main () {
 		var p = Parser.loadFromFile("assets/vamp-as3.gaf");
 		spr = new GAFSprite(p);
+		spr.playLoop(1, spr.getFrameCount());
 		Lib.current.stage.addChild(spr);
 		Lib.current.stage.addEventListener(Event.RESIZE, onResize);
 		onResize(null);

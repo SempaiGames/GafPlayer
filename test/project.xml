@@ -10,6 +10,7 @@
 
 	<haxelib name="openfl" />
 	<haxelib name="gafplayer" />
+	<haxelib name="format" if="html5" />
 
 	<assets path="Assets" rename="assets" include="*" />
 

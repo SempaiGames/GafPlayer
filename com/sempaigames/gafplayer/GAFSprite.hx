@@ -126,6 +126,10 @@ class GAFSprite extends Sprite {
 		}
 	}
 
+	public function getFrameCount () : Int {
+		return frames.length;
+	}
+
 	function onEnterFrame (e : Event) {
 		update(Lib.getTimer());
 	}

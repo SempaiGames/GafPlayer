@@ -5,8 +5,8 @@ import com.sempaigames.gafplayer.tags.Tag;
 import com.sempaigames.gafplayer.tags.TagDefineAtlas;
 import flash.geom.Point;
 import flash.geom.Rectangle;
-import flash.Assets;
-import flash.display.Tilesheet;
+import openfl.Assets;
+import openfl.display.Tilesheet;
 
 class ParserResult {
 
