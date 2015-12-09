@@ -12,6 +12,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.Lib;
+import openfl.display.PixelSnapping;
 
 class GAFSprite extends Sprite {
 
@@ -40,7 +41,7 @@ class GAFSprite extends Sprite {
 		var containerSpr = new Sprite();
 		for (obj in pAnimationObjects.objects) {
 			var spr = new Sprite();
-			var bmp = new Bitmap(atlas.elements[obj.atlasIdRef], true);
+			var bmp = new Bitmap(atlas.elements[obj.atlasIdRef], PixelSnapping.AUTO, true);
 			spr.addChild(bmp);
 			animationObjects[obj.id] = spr;
 			var tmp = atlas.elementsData[obj.atlasIdRef];

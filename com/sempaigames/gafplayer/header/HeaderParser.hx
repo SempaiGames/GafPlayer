@@ -29,7 +29,7 @@ class HeaderParser {
 			headerEnd.writeByte(bytes.readByte());
 		}
 		if (compressed) {
-			headerEnd.inflate();
+			headerEnd.uncompress();
 		}
 
 		if (header.majorVersion>=4) {
