@@ -69,6 +69,7 @@ class GAFSprite extends Sprite {
 	) {
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
+		gotoFrame(startFrame);
 		this.loop = false;
 		#if gafplayer_manual_update
 		this.startTime = startTime;
@@ -84,12 +85,19 @@ class GAFSprite extends Sprite {
 	) {
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
+		gotoFrame(startFrame);
 		this.loop = true;
 		#if gafplayer_manual_update
 		this.startTime = startTime;
 		#else
 		this.startTime = Lib.getTimer();
 		#end
+	}
+
+	function gotoFrame (target : Int) {
+		while (currentFrame!=target) {
+			advanceFrame();
+		}
 	}
 
 	function advanceFrame () {
@@ -121,9 +129,7 @@ class GAFSprite extends Sprite {
 				targetFrame = prevFrame;
 			}
 		}
-		while (targetFrame!=currentFrame) {
-			advanceFrame();
-		}
+		gotoFrame(targetFrame);
 	}
 
 	public function getFrameCount () : Int {
