@@ -11,14 +11,14 @@ import openfl.Assets;
 
 class Atlas {
 
-	static var bmpDataCache : Map<Int, Map<Int, BitmapData>>;
+	static var bmpDataCache : Map<String, Map<Int, BitmapData>>;
 
 	public var elements : Map<Int, BitmapData>;
 	public var elementsData : Map<Int, Element>;
 
 	public function new (from : TagDefineAtlas) {
 		if (bmpDataCache==null) {
-			bmpDataCache = new Map<Int, Map<Int, BitmapData>>();
+			bmpDataCache = new Map<String, Map<Int, BitmapData>>();
 		}
 		elements = new Map<Int, BitmapData>();
 		elementsData = new Map<Int, Element>();
@@ -31,10 +31,11 @@ class Atlas {
 		}
 		for (element in from.elements) {
 			var bmpData : BitmapData = null;
-			if (bmpDataCache[element.atlasIndex]!=null) {
-				bmpData = bmpDataCache[element.atlasIndex][element.elementAtlasIndex];
+			var atlasName = from.getAtlasFileName(element.atlasIndex);
+			if (bmpDataCache[atlasName]!=null) {
+				bmpData = bmpDataCache[atlasName][element.elementAtlasIndex];
 			} else {
-				bmpDataCache[element.atlasIndex] = new Map<Int, BitmapData>();
+				bmpDataCache[atlasName] = new Map<Int, BitmapData>();
 			}
 			if (bmpData==null) {
 				bmpData = new BitmapData(Std.int(element.width), Std.int(element.height));
@@ -43,7 +44,7 @@ class Atlas {
 					new Rectangle(element.origin.x, element.origin.y, element.width, element.height),
 					new Point(0, 0)
 				);
-				bmpDataCache[element.atlasIndex][element.elementAtlasIndex] = bmpData;
+				bmpDataCache[atlasName][element.elementAtlasIndex] = bmpData;
 			}
 			this.elements[element.elementAtlasIndex] = bmpData;
 			this.elementsData[element.elementAtlasIndex] = element;

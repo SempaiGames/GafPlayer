@@ -86,6 +86,10 @@ class TagDefineAtlas extends Tag {
 		}
 	}
 
+	public function getAtlasFileName (atlasId : Int) : String {
+		return atlases[atlasId-1].sources[0].fileName;
+	}
+
 	override public function toString () {
 		return "TagDefineAtlas";
 	}
