@@ -4,10 +4,10 @@
   "license": "MIT",
   "tags": ["gaf", "openfl"],
   "description": "GAF format plugin for OpenFL.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": ["fbricker"],
   "dependencies": {
     "openfl": ""
   },
-  "releasenote": "First release... working!"
+  "releasenote": "Several improvementes..."
 }
