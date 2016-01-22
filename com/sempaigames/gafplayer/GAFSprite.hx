@@ -23,6 +23,7 @@ class GAFSprite extends Sprite {
 	var startFrame : Int;
 	var endFrame : Int;
 	var loop : Bool;
+	var paused : Bool;
 	var startTime : Int;
 
 	public function new (p : ParserResult) {
@@ -32,6 +33,7 @@ class GAFSprite extends Sprite {
 		startFrame = 0;
 		endFrame = 0;
 		loop = false;
+		paused = false;
 		startTime = Lib.getTimer();
 		var stageData = p.getTagsByType(TagDefineStage)[0];
 		fps = stageData.fps;
@@ -67,6 +69,7 @@ class GAFSprite extends Sprite {
 	, startTime : Int
 	#end
 	) {
+		paused = false;
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
 		gotoFrame(startFrame);
@@ -83,6 +86,7 @@ class GAFSprite extends Sprite {
 	, startTime : Int
 	#end
 	) {
+		paused = false;
 		this.startFrame = startFrame;
 		this.endFrame = endFrame;
 		gotoFrame(startFrame);
@@ -92,6 +96,10 @@ class GAFSprite extends Sprite {
 		#else
 		this.startTime = Lib.getTimer();
 		#end
+	}
+
+	public function pause () {
+		paused = true;
 	}
 
 	function gotoFrame (target : Int) {
@@ -118,6 +126,9 @@ class GAFSprite extends Sprite {
 
 	public function update (now : Int) : Void {
 		var targetFrame : Int;
+		if (paused) {
+			return;
+		}
 		if (endFrame==startFrame) {
 			targetFrame = startFrame;
 		} else {
