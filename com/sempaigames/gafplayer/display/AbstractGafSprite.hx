@@ -1,6 +1,7 @@
 package com.sempaigames.gafplayer.display;
 
 import com.sempaigames.gafplayer.tags.TagDefineStage;
+import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
@@ -10,6 +11,7 @@ class AbstractGafSprite extends Sprite {
 	var currentFrame : Int;
 	var endFrame : Int;
 	var fps : Int;
+	var frames : Array<Frame>;
 	var loop : Bool;
 	var paused : Bool;
 	var startFrame : Int;
@@ -18,6 +20,7 @@ class AbstractGafSprite extends Sprite {
 	public function new (p : ParserResult) {
 		super();
 		var stageData = p.getTagsByType(TagDefineStage)[0];
+		frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
 		fps = stageData.fps;
 		currentFrame = 0;
 		endFrame = 0;
@@ -85,6 +88,10 @@ class AbstractGafSprite extends Sprite {
 			}
 		}
 		gotoFrame(targetFrame);
+	}
+
+	public function getFrameCount () : Int {
+		return frames.length;
 	}
 
 	#if !gafplayer_manual_update

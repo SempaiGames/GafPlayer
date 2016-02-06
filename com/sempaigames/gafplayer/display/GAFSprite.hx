@@ -17,7 +17,6 @@ import openfl.display.PixelSnapping;
 class GAFSprite extends AbstractGafSprite {
 
 	var animationObjects : Map<Int, Sprite>;
-	var frames : Array<Frame>;
 
 	public function new (p : ParserResult) {
 		super(p);
@@ -37,7 +36,6 @@ class GAFSprite extends AbstractGafSprite {
 			containerSpr.addChild(spr);
 		}
 		this.addChild(containerSpr);
-		frames = p.getTagsByType(TagDefineAnimationFrames2)[0].frames;
 		var pivot = p.getTagsByType(TagDefineTimeline)[0].pivot;
 		containerSpr.x = pivot.x;
 		containerSpr.y = pivot.y;
@@ -66,10 +64,6 @@ class GAFSprite extends AbstractGafSprite {
 			spr.transform.matrix = c.matrix;
 			spr.parent.setChildIndex(spr, c.depth);
 		}
-	}
-
-	public function getFrameCount () : Int {
-		return frames.length;
 	}
 
 }
