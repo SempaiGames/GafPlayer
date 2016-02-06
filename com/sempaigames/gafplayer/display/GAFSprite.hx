@@ -1,4 +1,4 @@
-package com.sempaigames.gafplayer;
+package com.sempaigames.gafplayer.display;
 
 import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2.Frame;
 import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2;
@@ -14,29 +14,14 @@ import flash.events.MouseEvent;
 import flash.Lib;
 import openfl.display.PixelSnapping;
 
-class GAFSprite extends Sprite {
+class GAFSprite extends AbstractGafSprite {
 
 	var animationObjects : Map<Int, Sprite>;
 	var frames : Array<Frame>;
-	var fps : Float;
-	var currentFrame : Int;
-	var startFrame : Int;
-	var endFrame : Int;
-	var loop : Bool;
-	var paused : Bool;
-	var startTime : Int;
 
 	public function new (p : ParserResult) {
-		super();
+		super(p);
 		animationObjects = new Map<Int, Sprite>();
-		currentFrame = 0;
-		startFrame = 0;
-		endFrame = 0;
-		loop = false;
-		paused = false;
-		startTime = Lib.getTimer();
-		var stageData = p.getTagsByType(TagDefineStage)[0];
-		fps = stageData.fps;
 		var tmp = p.getTagsByType(TagDefineAtlas)[0];
 		var atlas = new Atlas(tmp);
 		var pAnimationObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
@@ -56,53 +41,12 @@ class GAFSprite extends Sprite {
 		var pivot = p.getTagsByType(TagDefineTimeline)[0].pivot;
 		containerSpr.x = pivot.x;
 		containerSpr.y = pivot.y;
-		#if !gafplayer_manual_update
-		addEventListener(Event.ENTER_FRAME, onEnterFrame);
-		#end
 		do {
 			advanceFrame();
 		} while (currentFrame!=0);
 	}
 
-	public function play (startFrame : Int, endFrame : Int
-	#if gafplayer_manual_update
-	, startTime : Int
-	#end
-	) {
-		paused = false;
-		this.startFrame = startFrame;
-		this.endFrame = endFrame;
-		gotoFrame(startFrame);
-		this.loop = false;
-		#if gafplayer_manual_update
-		this.startTime = startTime;
-		#else
-		this.startTime = Lib.getTimer();
-		#end
-	}
-
-	public function playLoop (startFrame : Int, endFrame : Int
-	#if gafplayer_manual_update
-	, startTime : Int
-	#end
-	) {
-		paused = false;
-		this.startFrame = startFrame;
-		this.endFrame = endFrame;
-		gotoFrame(startFrame);
-		this.loop = true;
-		#if gafplayer_manual_update
-		this.startTime = startTime;
-		#else
-		this.startTime = Lib.getTimer();
-		#end
-	}
-
-	public function pause () {
-		paused = true;
-	}
-
-	function gotoFrame (target : Int) {
+	override function gotoFrame (target : Int) : Void {
 		while (currentFrame!=target) {
 			advanceFrame();
 		}
@@ -124,31 +68,8 @@ class GAFSprite extends Sprite {
 		}
 	}
 
-	public function update (now : Int) : Void {
-		var targetFrame : Int;
-		if (paused) {
-			return;
-		}
-		if (endFrame==startFrame) {
-			targetFrame = startFrame;
-		} else {
-			var totalAnimationTime = Std.int((1000/fps)*(endFrame-startFrame));
-			var currentAnimationTime = (now-startTime)%totalAnimationTime;
-			var prevFrame = currentFrame;
-			targetFrame = Std.int((currentAnimationTime/totalAnimationTime)*(endFrame-startFrame)) + startFrame - 1;
-			if (!loop && prevFrame>targetFrame) {
-				targetFrame = prevFrame;
-			}
-		}
-		gotoFrame(targetFrame);
-	}
-
 	public function getFrameCount () : Int {
 		return frames.length;
-	}
-
-	function onEnterFrame (e : Event) {
-		update(Lib.getTimer());
 	}
 
 }

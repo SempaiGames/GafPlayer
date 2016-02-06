@@ -1,6 +1,6 @@
 package;
 
-import com.sempaigames.gafplayer.GAFSprite;
+import com.sempaigames.gafplayer.display.GAFSprite;
 import com.sempaigames.gafplayer.Parser;
 import flash.display.Sprite;
 import flash.events.Event;
