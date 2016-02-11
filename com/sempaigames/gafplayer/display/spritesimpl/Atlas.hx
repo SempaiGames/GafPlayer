@@ -1,4 +1,4 @@
-package com.sempaigames.gafplayer;
+package com.sempaigames.gafplayer.display.spritesimpl;
 
 import com.sempaigames.gafplayer.tags.TagDefineAtlas;
 import com.sempaigames.gafplayer.tags.TagDefineAtlas.Element;

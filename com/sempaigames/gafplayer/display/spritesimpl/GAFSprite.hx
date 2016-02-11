@@ -1,4 +1,4 @@
-package com.sempaigames.gafplayer.display;
+package com.sempaigames.gafplayer.display.spritesimpl;
 
 import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2.Frame;
 import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2;

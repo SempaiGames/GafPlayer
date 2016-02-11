@@ -1,4 +1,4 @@
-package com.sempaigames.gafplayer.display;
+package com.sempaigames.gafplayer.display.tilesheetsimpl;
 
 import com.sempaigames.gafplayer.Parser;
 import com.sempaigames.gafplayer.tags.TagDefineAnimationFrames2;
@@ -20,39 +20,18 @@ class GAFSpriteTilesheet extends AbstractGafSprite {
 
 	public function new (p : ParserResult) {
 		super(p);
-		drawArrays = new Map<Int, Array<Float>>();
 		tilesheet = buildTilesheet(p);
 		var animObjects = p.getTagsByType(TagDefineAnimationObjects)[0];
 		var stageData = p.getTagsByType(TagDefineStage)[0];
 		var timeLine = p.getTagsByType(TagDefineTimeline)[0];
+		var builder = new DrawTilesArraysBuilder(frames, animObjects, timeLine.pivot);
+		drawArrays = builder.buildDrawArrays();
 		fps = stageData.fps;
 		startTime = Lib.getTimer();
-		for (frame in frames) {
-			var arr = [];
-			frame.changes.sort(function(x, y) {
-				return x.depth>y.depth ? 1 : -1;
-			});
-			for (change in frame.changes) {
-				var id = 0;
-				for (o in animObjects.objects) {
-					if (change.objectIdRef==o.id) {
-						break;
-					}
-					id++;
-				}
-				var matrix = change.matrix;
-				arr.push(matrix.tx+timeLine.pivot.x);
-				arr.push(matrix.ty+timeLine.pivot.y);
-				arr.push(id);
-				arr.push(matrix.a);
-				arr.push(matrix.b);
-				arr.push(matrix.c);
-				arr.push(matrix.d);
-			}
-			drawArrays[frame.frameId] = arr;
-		}
 		gotoFrame(0);
+		#if !gafplayer_manual_update
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		#end
 	}
 
 	function buildTilesheet (p : ParserResult) : Tilesheet {
